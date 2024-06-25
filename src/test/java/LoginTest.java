@@ -2,35 +2,38 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.Test;
+import pages.LoginPage;
+import pages.ProductsPage;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
-public class SauceTest extends BaseTest {
+public class LoginTest extends BaseTest {
     @Test
-    public void test() {
-        driver.findElement(By.name("user-name")).sendKeys("121212");
-        driver.findElement(By.name("password")).sendKeys("212");
-        driver.findElement(By.cssSelector("[type=submit]")).click();
-        String error = driver.findElement(By.cssSelector("[class='error-message-container error']")).getText();
+    public void enterLoginInvalidAndPasswordInvalid() {
+        loginPage = new LoginPage(driver);
+        loginPage.login("1212312", "21231");
+        String error = loginPage.getErrorMessage().getText();
         assertEquals(error, "Epic sadface: Username and password do not match any user in this service");
     }
+
     @Test
-    public void test1() {
-        driver.findElement(By.name("user-name")).sendKeys("");
-        driver.findElement(By.name("password")).sendKeys("");
-        driver.findElement(By.cssSelector("[type=submit]")).click();
-        String error = driver.findElement(By.cssSelector(".error-message-container.error")).getText();
+    public void enterEmpty() {
+        loginPage = new LoginPage(driver);
+        loginPage.login("", "");
+        String error = loginPage.getErrorMessage().getText();
         assertEquals(error, "Epic sadface: Username is required");
     }
+
     @Test
-    public void test2() {
-        driver.findElement(By.name("user-name")).sendKeys("standard_user");
-        driver.findElement(By.name("password")).sendKeys("secret_sauce");
-        driver.findElement(By.cssSelector("[type=submit]")).click();
-        boolean isPresent = driver.findElement(By.cssSelector("[class=title]")).isDisplayed();
+    public void enterValid() {
+        loginPage = new LoginPage(driver);
+        productsPage = new ProductsPage(driver);
+        loginPage.login("standard_user", "secret_sauce");
+        boolean isPresent = productsPage.getTitle().isDisplayed();
         assertTrue(isPresent, "The register is not displayed");
     }
+
     @Test
     public void test3() {
         System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
