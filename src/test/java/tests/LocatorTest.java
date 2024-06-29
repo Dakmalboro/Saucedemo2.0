@@ -1,35 +1,12 @@
+package tests;
+
+import com.fasterxml.jackson.databind.ser.Serializers;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.Test;
-import pages.LoginPage;
-import pages.ProductsPage;
 
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertTrue;
-
-public class LoginTest extends BaseTest {
-    @Test
-    public void enterLoginInvalidAndPasswordInvalid() {
-        loginPage.login("1212312", "21231");
-        String error = loginPage.getErrorMessage();
-        assertEquals(error, "Epic sadface: Username and password do not match any user in this service");
-    }
-
-    @Test
-    public void enterEmpty() {
-        loginPage = new LoginPage(driver);
-        loginPage.login("", "");
-        String error = loginPage.getErrorMessage();
-        assertEquals(error, "Epic sadface: Username is required");
-    }
-
-    @Test
-    public void enterValid() {
-        loginPage.login("standard_user", "secret_sauce");
-        assertTrue(productsPage.titleIsPresent(), "The register is not displayed");
-    }
-
+public class LocatorTest extends Serializers.Base {
     @Test
     public void test3() {
         System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
