@@ -11,9 +11,8 @@ import static org.testng.Assert.assertTrue;
 public class LoginTest extends BaseTest {
     @Test
     public void enterLoginInvalidAndPasswordInvalid() {
-        loginPage = new LoginPage(driver);
         loginPage.login("1212312", "21231");
-        String error = loginPage.getErrorMessage().getText();
+        String error = loginPage.getErrorMessage();
         assertEquals(error, "Epic sadface: Username and password do not match any user in this service");
     }
 
@@ -21,17 +20,14 @@ public class LoginTest extends BaseTest {
     public void enterEmpty() {
         loginPage = new LoginPage(driver);
         loginPage.login("", "");
-        String error = loginPage.getErrorMessage().getText();
+        String error = loginPage.getErrorMessage();
         assertEquals(error, "Epic sadface: Username is required");
     }
 
     @Test
     public void enterValid() {
-        loginPage = new LoginPage(driver);
-        productsPage = new ProductsPage(driver);
         loginPage.login("standard_user", "secret_sauce");
-        boolean isPresent = productsPage.getTitle().isDisplayed();
-        assertTrue(isPresent, "The register is not displayed");
+        assertTrue(productsPage.titleIsPresent(), "The register is not displayed");
     }
 
     @Test

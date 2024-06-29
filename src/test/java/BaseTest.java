@@ -21,6 +21,8 @@ public class BaseTest {
         options.addArguments("headless");
         driver = new ChromeDriver(options);
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        loginPage = new LoginPage(driver);
+        productsPage = new ProductsPage(driver);
         driver.get("https://www.saucedemo.com/");
     }
 

@@ -2,10 +2,9 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
 public class LoginPage {
-    WebDriver driver;
+    public WebDriver driver;
     public By loginInput = By.name("user-name");
     public By passwordInput = By.name("password");
     public By submitButton = By.cssSelector("[type=submit]");
@@ -21,7 +20,7 @@ public class LoginPage {
         driver.findElement(submitButton).click();
     }
 
-    public WebElement getErrorMessage() {
-        return driver.findElement(errorMessage);
+    public String getErrorMessage() {
+        return driver.findElement(errorMessage).getText();
     }
 }

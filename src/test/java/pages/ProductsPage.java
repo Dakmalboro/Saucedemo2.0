@@ -2,7 +2,6 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
 public class ProductsPage {
     WebDriver driver;
@@ -12,7 +11,7 @@ public class ProductsPage {
         this.driver = driver;
     }
 
-    public WebElement getTitle() {
-        return driver.findElement(title);
+    public boolean titleIsPresent() {
+        return driver.findElement(title).isDisplayed();
     }
 }
