@@ -9,7 +9,7 @@ import org.testng.annotations.Test;
 public class LocatorTest extends Serializers.Base {
     @Test
     public void test3() {
-        System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
+        //System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
         WebDriver browser = new ChromeDriver();
         browser.get("https://www.saucedemo.com/");
         browser.findElement(By.id("root"));
