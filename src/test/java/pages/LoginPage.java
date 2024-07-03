@@ -3,24 +3,27 @@ package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class LoginPage {
-    public WebDriver driver;
-    public By loginInput = By.name("user-name");
-    public By passwordInput = By.name("password");
-    public By submitButton = By.cssSelector("[type=submit]");
-    public By errorMessage = By.cssSelector(".error-message-container.error");
+public class LoginPage extends BasePage {
+    public By LOGIN_INPUT = By.name("user-name");
+    public By PASSWORD_INPUT = By.name("password");
+    public By SUBMIT_BUTTON = By.cssSelector("[type=submit]");
+    public By ERROR_MESSAGE = By.cssSelector(".error-message-container.error");
 
     public LoginPage(WebDriver driver) {
-        this.driver = driver;
+        super(driver);
+    }
+
+    public void open() {
+        driver.get(BASE_URL);
     }
 
     public void login(String username, String password) {
-        driver.findElement(loginInput).sendKeys(username);
-        driver.findElement(passwordInput).sendKeys(password);
-        driver.findElement(submitButton).click();
+        driver.findElement(LOGIN_INPUT).sendKeys(username);
+        driver.findElement(PASSWORD_INPUT).sendKeys(password);
+        driver.findElement(SUBMIT_BUTTON).click();
     }
 
     public String getErrorMessage() {
-        return driver.findElement(errorMessage).getText();
+        return driver.findElement(ERROR_MESSAGE).getText();
     }
 }
